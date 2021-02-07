@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block varactive3 %}
+active
+{% endblock %}
+
+{% block body %}
+        <h2 class="p-center">Тормозная система</h2>
+
+        <div class="card-block">
+            <div class="card card-menu" >
+                <a class="card-top" href="/brake/vacuum">
+                    <img src="{{ url_for("static", filename="37_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center"  href="/brake/vacuum">
+                    Вакуумный усилитель
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/brake/brake_cylinder">
+                    <img src="{{ url_for("static", filename="wilwood_master_cyl_wo_logo_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/brake/brake_cylinder">
+                    Главный тормозной цилиндр.
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/brake/brake_discs">
+                    <img src="{{ url_for("static", filename="41_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/brake/brake_discs">
+                   Тормозные диски
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/brake/brake_pads">
+                    <img src="{{ url_for("static", filename="38_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/brake/brake_pads">
+                   Колодки тормозные
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/brake/caliper">
+                    <img src="{{ url_for("static", filename="2112_brake_caliper_wo_logo_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/brake/caliper">
+                   Суппорт | рабочий тормозной цилиндр
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

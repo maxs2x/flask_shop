@@ -1,0 +1,11 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block body %}
+{{ super() }}
+
+
+<a href="/admin/login">Войти</a>
+<a href="/admin/logout">Выйти</a>
+<a class="nav-link" href="/admin/create">Добавить товар</a>
+
+{% endblock %}

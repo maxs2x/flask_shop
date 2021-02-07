@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block varactive4 %}
+active
+{% endblock %}
+
+{% block body %}
+        <h2 class="p-center">Комплектующие двигателя</h2>
+
+        <div class="card-block">
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/GBC">
+                    <img src="{{ url_for("static", filename="13_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/GBC">
+                    ГБЦ и комплектующие
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/timing_belt">
+                    <img src="{{ url_for("static", filename="7_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/timing_belt">
+                    Ремни | Шестерни ГРМ
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/intake_system">
+                    <img src="{{ url_for("static", filename="universal_trottle_body_black_main_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/intake_system">
+                    Впускная система
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/exhaust_system">
+                    <img src="{{ url_for("static", filename="muffer_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/exhaust_system">
+                    Выпускная система
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/motor_support">
+                    <img src="{{ url_for("static", filename="11_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/motor_support">
+                    Опоры двигателя
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/piston">
+                    <img src="{{ url_for("static", filename="9_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/piston">
+                    Шатунно-поршневая группа
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/engine/stuff">
+                    <img src="{{ url_for("static", filename="12_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/engine/stuff">
+                    Разное
+                </a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block varactive2 %}
+active
+{% endblock %}
+
+{% block body %}
+        <h2 class="p-center">Электрооборудование</h2>
+
+        <div class="card-block">
+            <div class="card card-menu" >
+                <a class="card-top" href="/electrical/ignition">
+                    <img src="{{ url_for("static", filename="161_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+
+                </a>
+                <a class="card-bottom p-center" href="/electrical/ignition">
+                   Система зажигания
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/electrical/sensor">
+                    <img src="{{ url_for("static", filename="map_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/electrical/sensor">
+                    Датчики
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/electrical/wiring">
+                    <img src="{{ url_for("static", filename="ecu_auto_120.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/electrical/wiring">
+                    Блоки управления | Проводка
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a class="card-top" href="/electrical/gena">
+                    <img src="{{ url_for("static", filename="t477547.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom p-center" href="/electrical/gena">
+                    Стартер | Генератор
+                </a>
+            </div>
+            <div class="card card-menu">
+                <a href="/electrical/light" class="card-top">
+                    <img src="{{ url_for("static", filename="t334762.jpg") }}" height="120" width="140" alt="ops image">
+                </a>
+                <a class="card-bottom" href="/electrical/light">
+                    Освещение
+                </a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

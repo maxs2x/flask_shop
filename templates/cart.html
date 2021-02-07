@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Магазин Шестерёнка</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="content-header-line">
+    <h2 class="display-4">КОРЗИНА</h2>
+    <a href="/">Вернуться к покупкам</a>
+</div>
+
+    <div class="container">
+
+        <table class="table table-borderless ">
+            <thead>
+                <tr class="tr-zerro">
+                    <th scope="col"> </th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена за шт.</th>
+                    <th scope="col">Количество</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+                <tbody>
+                {% for el in data %}
+                <tr>
+                    <td scope="row">
+                        {% if el.image %}
+                        {% set name = el.image %}
+                            <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{el.title}} {{el.producer}}
+                    </td>
+                    <td>{{el.price}}</td>
+                    <td>
+                        <form class="form" method="POST">
+                            <div class="add-dell-item">
+                                <button class="count-action  btn-none"  type="submit" value="{{el.id}}" name="del_one_id" id="del_one_id">
+                                    <span class="basket-item-amount-btn-minus"></span>
+                                </button>
+                                <div class="count-center">
+                                    <span class="input-group-text">{{el.value}}</span>
+                                </div>
+                                <button class="count-action btn-none" type="submit"  value="{{el.id}}" name="add_one_id" id="add_one_id">
+                                    <span  class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                    <td>{{el.value * el.price}}</td>
+                    <td>
+                        <form class="form" method="POST">
+                            <div class="basket-item-block-actions">
+						        <button class="basket-item-actions-remove btn-none" type="submit"  value="{{el.id}}" name="del_id" id="del_id"></button>
+					        </div>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <form class="footer_card" method="POST">
+                <div>
+                    <p>
+                        {% if cart_info.count_product %}
+                            Итого: {{cart_info.cost_products_in_cart}} руб.
+                        {% else %}
+                                0
+                        {% endif %}
+                    </p>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success btn-cart" value="" name="addasd_id" id="addasdae_id">Оформить заказ</button>
+                </div>
+            </form>
+    </div>
+    </div>
+
+{% endblock %}

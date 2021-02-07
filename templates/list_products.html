@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Список с ценами</title>
+{% endblock %}
+
+{% block body %}
+    <div class="card-block">
+        <p class="no-mobile">
+            Автомобильный генератор «СтартВОЛЬТ» - основной источник электроэнергии автомобиля, представляет собой устройство, которое преобразует механическую энергию в электрическую. Генератор обеспечивает зарядку АКБ и через него питает все электросистемы в авто после запуска ДВС.
+
+Российский климат и большое количество энергозависимых гаджетов, которые встроены в современные автомобили или приобретены отдельно, повышают нагрузку на электросистему. Инновационные генераторы, которые можно купить у нас в Санкт-Петербурге, повышенной мощности «СтартВОЛЬТ» разрешают проблему недозаряда или полной разрядки АКБ автомобиля, они идеально подходят для специализированных автомобилей, которые в силу специфической эксплуатации работают на холостом ходу (аварийно – спасательный инструмент и оборудование, спецсигналы, усиленный автозвук и т.д.).
+        </p>
+        {% for el in data %}
+            <div class="card-block-row">
+                <div class="card-img">
+                    {% if el.image %}
+                        {% set name = el.image %}
+                        <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                    {% endif %}
+                </div>
+                <div class="card-text">
+                    <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
+
+                    <p class="p-center">{{el.price}}руб. {{el.model_auto}}</p>
+                    <p class="p-center">Осталось {{el.balance}}шт.</p>
+
+                          <form class="form p-center" method="POST">
+                              <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
+                                  <button class="btn btn-by" >Купить в 1 клик</button>
+                              </a>
+                              <button class="btn btn-by" type="submit" value="{{el.id}}" name="add_id" id="add_id">
+                                  {% if cart_info.count_product %}
+                                       {% set ns = namespace(found=false) %}
+                                       {% for id_p in cart_info.arr_product_in_cart %}
+                                           {% if id_p == el.id %}
+                                                {% set ns.found = true %}
+                                           {% endif %}
+                                       {% endfor %}
+                                       {% if ns.found %}
+                                            В корзине
+                                       {% else %}
+                                            Добавить в корзину
+                                       {% endif %}
+                                  {% else %}
+                                       Добавить в корзину
+                                  {% endif %}
+                              </button>
+                          </form>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

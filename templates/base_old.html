@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}{% endblock %}
+</head>
+
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <main class="container-fluid p-1 m-2">
+        <header>
+            <nav class="navbar navbar-fixed-top navbar-light bg-light justify-content-center ">
+
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">
+                                        <img src="" alt="" width="30" height="24" class="d-inline-block align-top">
+                                        Shesternja
+                                    </a>
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                        <a class="nav-link link-dark p-1" aria-current="page" href="http://127.0.0.1:5000/">Главная</a>
+                                        <a class="nav-link link-dark p-1" href="http://127.0.0.1:5000/about"><p class="text-dark">О нас</p></a>
+                                        <a class="nav-link link-dark p-1" href="http://127.0.0.1:5000/contacts"><p class="text-dark">Контакты</p></a>
+                                        <a class="nav-link link-dark p-1" href="http://127.0.0.1:5000/"><p class="text-dark">Где забрать</p></a>
+                                        <a class="nav-link link-dark p-1" href="http://127.0.0.1:5000/"><p class="text-dark">Почему у нас дешевле?</p></a>
+
+                                </div>
+                            </div>
+
+
+
+                        <div class="col col-md-auto text-center bg-warning bg-gradient">
+
+                              {% if current_user.is_authenticated %}
+                              <div class="row">
+                                  <a href="/profile" class="navbar-item link-dark" style="text-decoration: none">
+                                            Профиль
+                                  </a>
+                              </div>
+                              {% endif %}
+                              {% if not current_user.is_authenticated %}
+                              <div class="row">
+                                    <a href="/login" class="navbar-item link-dark" style="text-decoration: none">
+                                        Войти
+                                    </a>
+                              </div>
+                              <div class="row">
+                                    <a href="/registration" class="navbar-item link-dark" style="text-decoration: none">
+                                        Регистрация
+                                    </a>
+                              </div>
+                              {% endif %}
+                              {% if current_user.is_authenticated %}
+                              <div class="row">
+                                  <a href="/logout" class="navbar-item link-dark" style="text-decoration: none">
+                                        Выйти
+                                  </a>
+                              </div>
+                              {% endif %}
+
+
+                          </div>
+                      </nav>
+            <div class="container p-4">
+                <div class="row justify-content-md-center justify-content-center">
+                    <div class="col-md-auto ">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">
+                                <img src="" alt="" width="30" height="24" class="d-inline-block align-top">
+                                Shesternja
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col align-self-center p-0 mt-3 mb-3">
+                        <div class="row row-cols-1 align-self-center justify-content-center">
+                            <div class="col-md-auto align-self-center">
+                                <a class="nav-link p-0 link-dark" href="/cart">
+                                    <img src="{{ url_for("static", filename="cart_icon.png") }}" height="35" width="35" alt="ops image">
+                                    {% if cart_info.count_product %}
+                                        в корзине {{cart_info.count_product}} товаров на сумму {{cart_info.cost_products_in_cart}} руб. экономия 0 руб.
+                                    {% else %}
+                                        Ваша корзина пуста
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+
+        </header>
+
+        <div class="container-lg p-0">
+            <div class="row ">
+                <div class="col-md-auto">
+                    <div class="list-group" id="left-menu-categories" role="tablist">
+
+                        <a href="/suspension" class="list-group-item list-group-item-action {% block varactive1 %}  {% endblock %}" aria-current="true">
+                            Подвеска
+                        </a>
+                        <a href="/electrical" class="list-group-item list-group-item-action {% block varactive2 %}} {% endblock %}">Электрика</a>
+                        <a href="/brake" class="list-group-item list-group-item-action {% block varactive3 %}  {% endblock %}">Тормозная система</a>
+                        <a href="/engine" class="list-group-item list-group-item-action {% block varactive4 %}  {% endblock %}">Двигатель</a>
+                        <a href="/body" class="list-group-item list-group-item-action {% block varactive5 %}  {% endblock %}" >Кузов</a>
+                        <a href="/transmission" class="list-group-item list-group-item-action {% block varactive6 %} {% endblock %}" >Трансмиссия</a>
+
+                    </div>
+                </div>
+                <div class="col p-0">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="pt-4 my-md-5 pt-md-5 border-top ">
+            <div class="row">
+                <div class="col-12 col-md">
+
+                    <small class="d-block mb-3 text-muted">© 2018-2020 Все права защищены.</small>
+                </div>
+                <div class="col-6 col-md">
+                    <a class="link-secondary" href="http://127.0.0.1:5000/about"><h5>О нас</h5></a>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary" href="#">Почему у нас дешевле</a></li>
+                        <li><a class="link-secondary" href="http://127.0.0.1:5000/contacts">Контакты</a></li>
+                        <li><a class="link-secondary" href="#">Как оплатить</a></li>
+                        <li><a class="link-secondary" href="#">Как забрать</a></li>
+                        <li><a class="link-secondary" href="#">Возврат и обмен</a></li>
+                        <li><a class="link-secondary" href="#">Карта сайта</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>nash_email@no_poka_ego.net</h5>
+                    <ul class="list-unstyled text-small">
+                        <li>Режим работы точки выдачи:</li>
+                        <li>10:00 - 21:00</li>
+                        <li><a class="link-secondary" href="#"> </a></li>
+                        <li><a class="link-secondary" href="#">Мы в социальных сетях:</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <ul class="list-unstyled text-small">
+                        <li>Мы принимаем:</li>
+                        <li><a class="link-secondary" href="#">Visa/MasterCard</a></li>
+                        <li><a class="link-secondary" href="#">Яндекс.Деньги</a></li>
+                        <li><a class="link-secondary" href="#">Qivi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </main>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</body>
+
+</html>

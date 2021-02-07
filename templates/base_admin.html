@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}{% endblock %}
+    <link href="{{ url_for("static", filename="css/style.css") }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6063ce6a21.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="main-container">
+        <header class="header-container">
+            <div class="header-container-first">
+                <div class="header-logo">
+                    <a class="navbar-brand" href="#">
+                        <img class="header-logo" src="" alt="" width="30" height="24" class="d-inline-block align-top">
+                        Shesternja
+                    </a>
+                </div>
+
+                <nav class="header-nav">
+                    {% if current_user.is_authenticated %}
+                        <a class="header-link" href="/profile">Профиль</a>
+                    {% endif %}
+                    {% if not current_user.is_authenticated %}
+                        <a class="header-link" href="/login">Войти</a>
+                        <a class="header-link" href="/registration">Регистрация</a>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                        <a class="header-link" href="/logout">Выйти</a>
+                    {% endif %}
+                </nav>
+
+            </div>
+            <div class="header-container-second">
+                <a class="header-nav-link" aria-current="page" href="/">ГЛАВНАЯ</a>
+                <a class="header-nav-link" href="/about">О НАС</a>
+                <a class="header-nav-link" href="/contacts">КОНТАКТЫ</a>
+                <a class="header-nav-link" href="#">ГДЕ ЗАБРАТЬ</a>
+                <a class="header-nav-link" href="#">ПОЧЕМУ У НАС ДЕШЕВЛЕ?</a>
+            </div>
+        </header>
+        <main class="content-container">
+                <nav class="nav-main">
+                    <a href="/suspension" class="header-nav-link {% block varactive1 %}  {% endblock %}" >Подвеска</a>
+                    <a href="/electrical" class="header-nav-link {% block varactive2 %}  {% endblock %}">Электрика</a>
+                    <a href="/brake" class="header-nav-link {% block varactive3 %}  {% endblock %}">Тормозa</a>
+                    <a href="/engine" class="header-nav-link {% block varactive4 %}  {% endblock %}">Двигатель</a>
+                    <a href="/body" class="header-nav-link {% block varactive5 %}  {% endblock %}" >Кузов</a>
+                    <a href="/transmission" class="header-nav-link {% block varactive6 %}  {% endblock %}" >Трансмиссия</a>
+                </nav>
+                <div class="content-block">
+                    {% block body %}{% endblock %}
+                </div>
+
+            <footer>
+                <div class="footer-container">
+                    <div class="none-content">
+
+                    </div>
+                    <div class="col-f-l">
+                        <ul class="ul-footer">
+                            <li>
+                                <a class="footer-nav-link" href="/about">О нас</a>
+                            </li>
+                            <li>
+                                <a class="footer-nav-link" href="/contacts">Контакты</a>
+                            </li>
+                        </ul>
+                        <ul class="ul-footer">
+                            <li>
+                              <a class="footer-nav-link" href="#">Где забрать</a>
+                            </li>
+                            <li>
+                                <a class="footer-nav-link" href="#">Почему у нас дешевле?</a>
+                            </li>
+                        </ul>
+                        <ul class="ul-footer">
+                            <li>
+                                <a class="footer-nav-link" aria-current="page" href="/">Карта сайта</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-f-r">
+                        <p class="right">Мы принимаем: </p>
+                        <img class="right" src="{{ url_for("static", filename="paysystems.png") }}">
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>

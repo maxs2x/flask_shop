@@ -1,0 +1,30 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block body %}
+
+        <h1>Добавление товара</h1>
+
+        <form method="POST" action="{{url_for('create')}}" enctype="multipart/form-data">
+            <p><input type="text" class="from-control" name="title" id="title" placeholder="Введите название"><br>
+            <p><input type="text" class="from-control" name="price" id="price" placeholder="Введите цену"><br>
+            <p><input type="text" class="from-control" name="balance" id="balance" placeholder="Введите количество на складе"><br>
+            <p><input type="text" class="from-control" name="description" id="description" placeholder="Введите описание товара"><br>
+            <p><input type="text" class="from-control" name="producer" id="producer" placeholder="Введите имя производителя"><br>
+            <p><input type="text" class="from-control" name="model_auto" id="model_auto" placeholder="Для какой модели деталь?"><br>
+            <p><input type="text" class="from-control" name="navigation_categories" id="navigation_categories" placeholder="Введите категорию меню"><br>
+            <div class="upload-btn-wrapper">
+              <button class="btn">Загрузить изображение</button>
+              <input type="file" name="file" />
+            </div>
+            <p><input type="text" class="from-control" name="image_alt" id="image_alt" placeholder="Введите описание изображения"><br>
+
+            <p><button class="btn-default" type="submit">Добавить товар</button>
+        </form>
+
+    </div>
+
+{% endblock %}

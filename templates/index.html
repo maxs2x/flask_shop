@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Магазин Шестерёнка</title>
+{% endblock %}
+
+{% block body %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Мы открылись!</h1>
+        <br>
+        <p class="lead">Первый дискоунт магазин по автозапчастям в Кирове! Приобретайте качественные запчасти на свой авто по разумным ценам. Покупая у нав, Вы экономите время и деньги! Не надо стоять в очереди и ждать пока Вам подберут нужную деталь. У нас дешевле потому что нам не нужно содержать огромный шатат продовцов-консультантов.</p>
+      </div>
+
+      <div class="card-deck mb-3 text-center">
+      {% for el in data %}
+
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 fw-normal">{{el.title}}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">${{el.price}} </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{el.producer}}</li>
+              <li>{{el.model_auto}}</li>
+              <li>Priority email support</li>
+              <li>Help center access</li>
+            </ul>
+            <form action="/add-to-cart" method="post">
+                <input type="hidden" name="add_to_cart">
+                <input type="hidden" name="product_id" value="{{ el.id }}">
+                <input type="hidden" name="qty" value="1">
+                <button type="submit" name="add_to_cart" class="w-100 btn btn-lg btn-primary">Купить</button>
+            </form>
+          </div>
+        </div>
+
+      {% endfor %}
+      </div>
+
+
+{% endblock %}

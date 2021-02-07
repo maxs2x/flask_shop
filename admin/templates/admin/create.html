@@ -1,0 +1,44 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Добавление товара</h1>
+
+        <form class="form" method="POST">
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="title" id="title" placeholder="Введите название"><br>
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="price" id="price" placeholder="Введите цену"><br>
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="balance" id="balance" placeholder="Введите количество на складе"><br>
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="description" id="description" placeholder="Введите описание товара"><br>
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="producer" id="producer" placeholder="Введите имя производителя"><br>
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="model_auto" id="model_auto" placeholder="Для какой модели деталь?"><br>
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="navigation_categories" id="navigation_categories" placeholder="Введите категорию меню"><br>
+            </div>
+            <div class="row mb-2">
+                <label for="image" class="form-label">Выберите изображение</label>
+                <input class="form-control" type="file" name="image" id="image">
+            </div>
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="image_alt" id="image_alt" placeholder="Введите описание изображения"><br>
+            </div>
+            <button class="btn btn-default" type="submit">Добавить товар</button>
+        </form>
+
+    </div>
+{% endblock %}
