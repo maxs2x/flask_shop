@@ -55,7 +55,9 @@ input {
   margin: 5px 0px;
   cursor: pointer;
 }
-
+.btn-by-main {
+    color: #fff;
+}
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
   position: absolute;
@@ -145,12 +147,24 @@ input {
 .content-block {
     border: 1px solid #d5d5d5;
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 25px;
+    border-radius: 5px;
+    min-height: 500px;
+}
+.content-block-no-border {
+    padding: 10px;
+    margin-top: 5px;
     border-radius: 5px;
     min-height: 500px;
 }
 .nav-main {
     margin: 25px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.nav-border {
+    border: solid 1px #d5d5d5;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -172,7 +186,7 @@ input {
     margin: 15px 0px;
 }
 .active {
-    background-color: #ffc900;
+    color: #e85a22;
 }
 
 .nav-main .header-nav-link {
@@ -308,14 +322,17 @@ td {
 .orange {
     color: #f26834;
 }
-
-
+.white {
+    color: #fff;
+}
+.text-center {
+    text-align: center;
+}
 .card-block {
     display: flex;
     flex-wrap: wrap;
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid #d5d5d5;
     border-radius: 5px;
     margin: 20px 10px;
     padding: 10px;
@@ -326,10 +343,24 @@ td {
     height: auto;
     width: 90%;
     margin: 5px;
-    padding: 5px 20px;
+    padding: 0px 20px;
     border: 2px solid #d5d5d5;
     border-radius: 5px;
     text-color: #000;
+}
+.card-text {
+    border-left: solid 3px #000;
+    padding-left: 15px;
+    width: 100%;
+}
+.card-price-btm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.card-price-btm .card-top {
+    width: auto;
+    height: auto;
 }
 .card {
     display: grid;
@@ -362,9 +393,27 @@ td {
     background-color: #e85a22;
     font-weight: 600;
     transition: 0.5s;
+    border-radius: 5px;
+}
+.card-main {
+    height: auto;
+    width: 250px;
+}
+.card-main:hover .card-main-bottom, .card-main:hover .btn-by-main, .card-main:hover .p-center{
+    color: #fff;
+    background-color: #e85a22;
+    font-weight: 600;
+    transition: 0.5s;
+    border-radius: 5px;
 }
 
-.p-center:hover {
+.card-main-bottom {
+    border-top: 2px solid #000;
+    width: 250px;
+    font-size: 16px;
+}
+.p-center {
+    text-align: center;
 }
 .wrapper__checkbox {
   display: none;

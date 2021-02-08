@@ -6,31 +6,33 @@
 
 {% block body %}
 
-
-      <div class="card-deck mb-3 text-center">
+    <h2 class="text-center">Новые поступления</h2>
+      <div class="card-block">
       {% for el in data %}
+            <div class="card card-main">
+                <a class="card-top" href="/body/front_bumper">
+                    <div class="card-menu">
 
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 fw-normal">{{el.title}}</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">${{el.price}} </h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>{{el.producer}}</li>
-              <li>{{el.model_auto}}</li>
-              <li>Priority email support</li>
-              <li>Help center access</li>
-            </ul>
-            <form action="/add-to-cart" method="post">
-                <input type="hidden" name="add_to_cart">
-                <input type="hidden" name="product_id" value="{{ el.id }}">
-                <input type="hidden" name="qty" value="1">
-                <button type="submit" name="add_to_cart" class="w-100 btn btn-lg btn-primary">Купить</button>
-            </form>
-          </div>
-        </div>
+                        {% if el.image %}
+                            {% set name = el.image %}
+                            <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                        {% endif %}
+                    </div>
+                    <div class="card-main-bottom ">
+                        <p class="p-center">{{el.title}} "{{el.producer}}"</p>
+                        <p class="p-center">Для: {{el.model_auto}} </p>
+                        <div class="card-price-btm">
+                            <p class="p-center">{{el.price}} руб.</p>
 
+                            <form class="form p-center white" method="POST">
+                                  <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
+                                      <button class="btn-by-main btn-none" >Купить в 1 клик</button>
+                                  </a>
+                            </form>
+                        </div>
+                    </div>
+                </a>
+            </div>
       {% endfor %}
       </div>
     </div>

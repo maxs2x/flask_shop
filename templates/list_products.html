@@ -21,9 +21,9 @@
                 </div>
                 <div class="card-text">
                     <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
-
-                    <p class="p-center">{{el.price}}руб. {{el.model_auto}}</p>
-                    <p class="p-center">Осталось {{el.balance}}шт.</p>
+                    <p class="p-center">Подходит на:  {{el.model_auto}} </p>
+                    <p class="p-center">Цена: <span class="orange">{{el.price}} руб.</span></p>
+                    <p class="p-center">Осталось в наличии: {{el.balance}}шт.</p>
 
                           <form class="form p-center" method="POST">
                               <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >

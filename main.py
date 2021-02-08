@@ -90,7 +90,7 @@ def cart_info(session):
 def index():
     items = Products.query.all()
     cart_informations = cart_info(session)
-    return render_template('index.html', data=items, cart_info=cart_informations)
+    return render_template('index.html', data=items, cart_info=cart_informations, main=[1, 2])
 
 
 @app.route('/<path:subpath>')

@@ -16,9 +16,9 @@
         <header class="header-container">
             <div class="header-container-first">
                 <div class="header-logo">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <img class="header-logo" src="{{ url_for("static", filename="logo.png") }}" alt="" width="40" height="40" class="d">
-                        Шестерня
+                        Шестёнка
                     </a>
                 </div>
                 <div class="header-cart">
@@ -79,17 +79,23 @@
         </header>
         <main class="content-container">
                 <nav class="nav-main">
-                    <a href="/suspension" class="header-nav-link {% block varactive1 %}  {% endblock %}" >Подвеска</a>
-                    <a href="/electrical" class="header-nav-link {% block varactive2 %}  {% endblock %}">Электрика</a>
-                    <a href="/brake" class="header-nav-link {% block varactive3 %}  {% endblock %}">Тормозa</a>
-                    <a href="/engine" class="header-nav-link {% block varactive4 %}  {% endblock %}">Двигатель</a>
-                    <a href="/body" class="header-nav-link {% block varactive5 %}  {% endblock %}" >Кузов</a>
-                    <a href="/transmission" class="header-nav-link {% block varactive6 %}  {% endblock %}" >Трансмиссия</a>
+                    <div class="nav-border">
+                        <a href="/suspension" class="header-nav-link {% block varactive1 %}  {% endblock %}" >Подвеска</a>
+                        <a href="/electrical" class="header-nav-link {% block varactive2 %}  {% endblock %}">Электрика</a>
+                        <a href="/brake" class="header-nav-link {% block varactive3 %}  {% endblock %}">Тормозa</a>
+                        <a href="/engine" class="header-nav-link {% block varactive4 %}  {% endblock %}">Двигатель</a>
+                        <a href="/body" class="header-nav-link {% block varactive5 %}  {% endblock %}" >Кузов</a>
+                        <a href="/transmission" class="header-nav-link {% block varactive6 %}  {% endblock %}" >Трансмиссия</a>
+                    </div>
                 </nav>
-                <div class="content-block">
-                    {% block body %}{% endblock %}
-                </div>
+                {% if main %}
+                    <div class="content-block-no-border">
+                {% else %}
+                    <div class="content-block">
 
+                {% endif %}
+                        {% block body %}{% endblock %}
+                    </div>
             <footer>
                 <div class="footer-container">
                     <div class="none-content">
