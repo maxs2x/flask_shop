@@ -57,6 +57,8 @@ input {
 }
 .btn-by-main {
     color: #fff;
+    display: flex;
+    flex: end;
 }
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
@@ -355,12 +357,25 @@ td {
 }
 .card-price-btm {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    padding-left: 18px;
 }
 .card-price-btm .card-top {
     width: auto;
     height: auto;
+}
+.card-price-btm .card-top p{
+    font-size: 18px;
+}
+.card-price-btm form {
+    padding-top: 22px;
+    padding-left: 25px;
+}
+.card-price-btm form a {
+    bottom: 0px;
+}
+.card-main:hover form a {
+    text-decoration: underline;
+    text-decoration-color: white;
 }
 .card {
     display: grid;
@@ -391,9 +406,10 @@ td {
 .card:hover .card-bottom {
     color: #fff;
     background-color: #e85a22;
-    font-weight: 600;
+    font-weight: 300;
     transition: 0.5s;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .card-main {
     height: auto;
@@ -402,11 +418,14 @@ td {
 .card-main:hover .card-main-bottom, .card-main:hover .btn-by-main, .card-main:hover .p-center{
     color: #fff;
     background-color: #e85a22;
-    font-weight: 600;
+    font-weight: 500;
     transition: 0.5s;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
-
+.card-main:hover a {
+    cursor: pointer;
+}
 .card-main-bottom {
     border-top: 2px solid #000;
     width: 250px;

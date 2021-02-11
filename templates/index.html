@@ -14,7 +14,7 @@
                     <div class="card-menu">
 
                         {% if el.image %}
-                            {% set name = el.image %}
+                            {% set name =     el.image %}
                             <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
                         {% endif %}
                     </div>
@@ -24,7 +24,7 @@
                         <div class="card-price-btm">
                             <p class="p-center">{{el.price}} руб.</p>
 
-                            <form class="form p-center white" method="POST">
+                            <form class="form p-center white " method="POST">
                                   <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
                                       <button class="btn-by-main btn-none" >Купить в 1 клик</button>
                                   </a>
