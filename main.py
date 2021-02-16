@@ -86,6 +86,15 @@ def cart_info(session):
     return info
 
 
+def bread_crumbs(url, elem):
+    menu_categories = {'Кузов': ['front_bumper'], 'Элуктрика': ['gena']}
+    if elem:
+        navigation_categories = elem['navigation_categories']
+        for item in menu_categories:
+            if navigation_categories in item:
+                x = navigation_categories
+            return x
+
 @app.route('/')
 def index():
     items = Products.query.all()
@@ -160,6 +169,13 @@ def categories_menu(variable_name, subpath):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/product-card/<path:subpath>')
+def product_card(subpath):
+    cart_informations = cart_info(session)
+    items = Products.query.filter_by(id=str(subpath))
+    return render_template('product_card.html', cart_info=cart_informations, product_info=items, product_card=[1, 2])
 
 
 @app.route('/create', methods=['POST', 'GET'])

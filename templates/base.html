@@ -62,7 +62,7 @@
                           {% if current_user.is_authenticated %}
                               <a class="wrapper__menu-link" href="/logout">Выйти</a>
                           {% endif %}
-                          <a href="#" class="wrapper__menu-link">Главная</a>
+                          <a href="/" class="wrapper__menu-link">Главная</a>
                           <a href="/about" class="wrapper__menu-link">О компании</a>
                           <a href="/contacts" class="wrapper__menu-link">Контакты</a>
                           <a href="#" class="wrapper__menu-link">Услуги</a>
@@ -89,6 +89,8 @@
                     </div>
                 </nav>
                 {% if main %}
+                    <div class="content-block-no-border">
+                {% elif product_card %}
                     <div class="content-block-no-border">
                 {% else %}
                     <div class="content-block">

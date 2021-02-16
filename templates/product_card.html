@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Список с ценами</title>
+{% endblock %}
+{% block body %}
+    {% for el in product_info %}
+    <div class="product-card-top">
+        <div class="bread-crumbs">
+            <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
+        </div>
+        <div class="info-product">
+            <div class="card-img">
+                {% if el.image %}
+                    {% set name = el.image %}
+                    <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                {% endif %}
+            </div>
+            <div>
+                <p class="p-center">Цена: <span class="orange">{{el.price}} руб.</span></p>
+                <form class="form p-center" method="POST">
+                    <div class="add-dell-item">
+                        <button class="count-action  btn-none"  type="submit" value="{{el.id}}" name="del_one_id" id="del_one_id">
+                            <span class="basket-item-amount-btn-minus"></span>
+                        </button>
+                        <div class="count-center">
+                            <span class="input-group-text">{{el.value}}</span>
+                        </div>
+                        <button class="count-action btn-none" type="submit"  value="{{el.id}}" name="add_one_id" id="add_one_id">
+                            <span  class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
+                        </button>
+                    </div>
+                </form>
+                <p class="p-center">Осталось в наличии: {{el.balance}}шт.</p>
+                <form class="form p-center" method="POST">
+                    <button class="btn btn-by" type="submit" value="{{el.id}}" name="add_id" id="add_id">
+                        {% if cart_info.count_product %}
+                            {% set ns = namespace(found=false) %}
+                            {% for id_p in cart_info.arr_product_in_cart %}
+                                {% if id_p == el.id %}
+                                    {% set ns.found = true %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if ns.found %}
+                                В корзине
+                            {% else %}
+                                Добавить в корзину
+                            {% endif %}
+                        {% else %}
+                            Добавить в корзину
+                        {% endif %}
+                    </button>
+                    <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
+                        <button class="btn btn-by" >Купить в 1 клик</button>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for("static", filename="js/scripts.js") }}"></script>
+    <div class="product-card-footer">
+        <div class="product-tabs">
+            <ul>
+                <li class="active" onclick="return ChangeBgColor('1');" id="btn1">
+                    Характеристики
+                </li>
+                <li onclick="return ChangeBgColor('2');" id="btn2">
+                    Применяемость
+                </li>
+                <li onclick="return ChangeBgColor('3');" id="btn3">
+                    Отзывы
+                </li>
+            </ul>
+            <div id="content-slider">
+              <div class="displayyes" id="text1">
+                lorem ipsum 1
+              </div>
+              <div class="display" id="text2">
+                lorem ipsum 2
+              </div>
+              <div class="display" id="text3">
+                lorem ipsum 3
+              </div>
+            </div>
+        </div>
+        <div class="product-page">
+
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+{% endblock %}

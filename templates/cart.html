@@ -13,18 +13,18 @@
 
     <div class="container">
 
-        <table class="table table-borderless ">
+        <table class="table table-borderless col-del">
             <thead>
                 <tr class="tr-zerro">
                     <th scope="col"> </th>
                     <th scope="col">Название</th>
-                    <th scope="col">Цена за шт.</th>
+                    <th class="col">Цена за шт.</th>
                     <th scope="col">Количество</th>
                     <th scope="col">Сумма</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-                <tbody>
+            <tbody>
                 {% for el in data %}
                 <tr>
                     <td scope="row">
@@ -34,7 +34,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        {{el.title}} {{el.producer}}
+                        <a href="/product-card/{{el.id}}">
+                            {{el.title}} {{el.producer}}
+                        </a>
                     </td>
                     <td>{{el.price}}</td>
                     <td>
@@ -62,8 +64,48 @@
                     </td>
                 </tr>
                 {% endfor %}
-              </tbody>
-            </table>
+            </tbody>
+        </table>
+        {% for el in data %}
+            <div class="card-block-row-mobile mobile">
+                <div class="card-img">
+                    {% if el.image %}
+                        {% set name = el.image %}
+                        <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                    {% endif %}
+                </div>
+                <div class="card-text-mobile">
+                    <div class="grid-9-1">
+                        <a href="/product-card/{{el.id}}">
+                            <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
+                        </a>
+                        <form class="form" method="POST">
+                                <div class="basket-item-block-actions">
+                                    <button class="basket-item-actions-remove btn-none" type="submit"  value="{{el.id}}" name="del_id" id="del_id"></button>
+                                </div>
+                        </form>
+                    </div>
+                    <p class="p-center">Цена за штуку: <span class="orange">{{el.price}} руб.</span></p>
+                    <div class="form-cart-mobile p-center">
+                        <form class="form p-center" method="POST">
+                            <div class="add-dell-item">
+                                <button class="count-action  btn-none"  type="submit" value="{{el.id}}" name="del_one_id" id="del_one_id">
+                                    <span class="basket-item-amount-btn-minus"></span>
+                                </button>
+                                <div class="count-center">
+                                    <span class="input-group-text">{{el.value}}</span>
+                                </div>
+                                <button class="count-action btn-none" type="submit"  value="{{el.id}}" name="add_one_id" id="add_one_id">
+                                    <span  class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
+                                </button>
+                            </div>
+                        </form>
+                        <p class="p-center">Сумма: {{el.value * el.price}}</p>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
             <form class="footer_card" method="POST">
                 <div>
                     <p>
