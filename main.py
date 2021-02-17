@@ -35,9 +35,6 @@ class Products(db.Model):
     image = db.Column(db.String)
     image_alt = db.Column(db.String)
 
-    def __repr__(self):
-        return self.description
-
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -123,33 +120,68 @@ def route_first_level_path(subpath):
         return render_template('contacts.html', cart_info=cart_informations)
 
 
-def do_in_cart(id_product, session):
+def quantity_validation(id_product, value_in, value_add):
+    items = Products.query.filter_by(id=str(id_product))
+
+    if (int(value_add) + int(value_in)) <= int(items[0].balance):
+        if (int(value_add) + int(value_in)) > -1:
+            print('quantity_validation')
+            print(items[0].balance)
+            return True
+        print('quantity_validation FALSE')
+        return False
+    else:
+        print('quantity_validation FALSE')
+        return False
+
+
+def do_in_cart(id_product, session, *args):
     # приводим оба параметра к числу что бы сессия не материлась
     id = id_product
-    value = int('1')
-    # cart_session() # проверяет существует ли сессия корзины и если нет, то создает её, а если да, то норм
-    if not session.get('cart'):
-        session['cart'] = [{
-            'product_id': id,
-            'value': int(value)
-        }]
+    if len(args) > 0:
+        value = int(args[0])
     else:
-        # добавляем товар к сессии в виде словаряa
+        value = int('1')
+    # проверяет существует ли сессия корзины и если нет, то создает её, а если да, то норм
+    if not session.get('cart'):
+        validation_value = quantity_validation(id_product, 0, value)
+        if validation_value:
+            session['cart'] = [{
+                'product_id': id,
+                'value': int(value)
+            }]
+        flash('На складе больше нет такого товара')
+    else:
+        # добавляем товар к сессии в виде словаря
+        # для этого в цикле ищем товар добавленный в сессию с таким же id
+        # если к концу цикла не находим, то добавляем в сессию новый товар
         a = 0
         for elem in session['cart']:
             a += 1
             if int(elem['product_id']) == int(id):
-                session['cart'].remove(elem)
-                elem['value'] = elem['value'] + int(1)
-                session['cart'].append(elem)
-                session.modified = True
+
+                validation_value = quantity_validation(id_product, elem['value'], value)
+                if validation_value:
+                    session['cart'].remove(elem)
+                    elem['value'] = elem['value'] + int(value)
+                    if elem['value'] < 1:
+                        del_in_cart(elem['product_id'], session)
+                        flash('На складе больше нет такого товара')
+                        break
+                    session['cart'].append(elem)
+                    session.modified = True
+                    break
+                flash('На складе больше нет такого товара')
                 break
             if a == len(session['cart']):
-                session['cart'].append({
-                    'product_id': id,
-                    'value': int(value)
-                })
-                session.modified = True
+                validation_value = quantity_validation(id_product, 0, value)
+                if validation_value:
+                    session['cart'].append({
+                        'product_id': id,
+                        'value': int(value)
+                    })
+                    session.modified = True
+                    break
                 break
     in_cart = product_in_cart(session)
     print(session['cart'])
@@ -157,12 +189,27 @@ def do_in_cart(id_product, session):
     return render_template('cart.html', session=session, data=in_cart, cart_info=cart_informations)
 
 
+def del_in_cart(product_id, session):
+    a = 0
+    for elem in session['cart']:
+        if elem['product_id'] == product_id:
+            del session['cart'][a]
+        a += 1
+    return session
+
+
 @app.route('/<variable_name>/<path:subpath>', methods=['POST', 'GET'])
 def categories_menu(variable_name, subpath):
     request_path = request
     if request.method == 'POST':
-        do_in_cart(request.form['add_id'], session)
-    display = redirect_for_subpath(subpath, request_path)
+        try:
+            do_in_cart(request.form['add_id'], session, int(request.form['number_of_additions']))
+        except:
+            do_in_cart(request.form['add_id'], session)
+    if variable_name == 'product-card':
+        display = product_card(subpath)
+    else:
+        display = redirect_for_subpath(subpath, request_path)
     return display
 
 
@@ -231,38 +278,19 @@ def cart():
         in_cart = product_in_cart(session)
         return render_template('cart.html', data=in_cart, cart_info=cart_informations)
     else:
-        if 'del_id' in request.form:
-            id = request.form['del_id']
-            a = 0
-            for elem in session['cart']:
-                if elem['product_id'] == id:
-                    del session['cart'][a]
-                    in_cart = product_in_cart(session)
-                    if len(in_cart) > 0:
-                        del in_cart[a]
-                a += 1
-        elif ('add_one_id' in request.form) or ('del_one_id' in request.form):
-            if 'add_one_id' in request.form:
-                operation = int(1)
-                print(operation)
-                id = request.form['add_one_id']
-            elif 'del_one_id' in request.form:
-                operation = int(-1)
-                id = request.form['del_one_id']
-            a = 0
-            print(operation)
-            for elem in session['cart']:
-                if elem['product_id'] == id:
-                    session['cart'][a]['value'] += operation
-                    if session['cart'][a]['value'] == 0:
-                        del session['cart'][a]
-                    break
-                a += 1
-        in_cart = product_in_cart(session)
-        cart_informations = cart_info(session)
-        session.modified = True
-        return redirect(url_for('cart'))
-
+        if ('del_id' in request.form) or ('del_one_id' in request.form):
+            if 'del_id' in request.form:
+                product_id = request.form['del_id']
+                del_in_cart(product_id, session)
+            else:
+                product_id = request.form['del_one_id']
+                do_in_cart(product_id, session, -1)
+            session.modified = True
+            return redirect(url_for('cart'))
+        elif 'add_one_id' in request.form:
+            do_in_cart(request.form['add_one_id'], session)
+            session.modified = True
+            return redirect(url_for('cart'))
 
 
 @app.route('/add-to-cart/<id_product>', methods=['GET', 'POST'])

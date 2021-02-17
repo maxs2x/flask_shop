@@ -40,6 +40,15 @@
                     </td>
                     <td>{{el.price}}</td>
                     <td>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <ul class="flashes p-center">
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
                         <form class="form" method="POST">
                             <div class="add-dell-item">
                                 <button class="count-action  btn-none"  type="submit" value="{{el.id}}" name="del_one_id" id="del_one_id">

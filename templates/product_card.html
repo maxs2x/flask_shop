@@ -7,10 +7,10 @@
     {% for el in product_info %}
     <div class="product-card-top">
         <div class="bread-crumbs">
-            <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
+            <h3 class="p-left">{{el.title}} "{{el.producer}}" для {{ el.model_auto }}</h3>
         </div>
         <div class="info-product">
-            <div class="card-img">
+            <div class="card-img-slider">
                 {% if el.image %}
                     {% set name = el.image %}
                     <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
@@ -18,69 +18,66 @@
             </div>
             <div>
                 <p class="p-center">Цена: <span class="orange">{{el.price}} руб.</span></p>
-                <form class="form p-center" method="POST">
+                    <span id="alert-before"></span>
                     <div class="add-dell-item">
-                        <button class="count-action  btn-none"  type="submit" value="{{el.id}}" name="del_one_id" id="del_one_id">
+                        <button class="count-action  btn-none" onclick="return Calculate('-');"   value="{{el.id}}" name="del_one_id" id="del_one_id">
                             <span class="basket-item-amount-btn-minus"></span>
                         </button>
                         <div class="count-center">
-                            <span class="input-group-text">{{el.value}}</span>
+                            <div class="input-group-text" id="count-product">1</div>
                         </div>
-                        <button class="count-action btn-none" type="submit"  value="{{el.id}}" name="add_one_id" id="add_one_id">
+                        <button class="count-action btn-none" onclick="return Calculate('+');"  value="{{el.id}}" name="add_one_id" id="add_one_id">
                             <span  class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
                         </button>
                     </div>
-                </form>
-                <p class="p-center">Осталось в наличии: {{el.balance}}шт.</p>
-                <form class="form p-center" method="POST">
-                    <button class="btn btn-by" type="submit" value="{{el.id}}" name="add_id" id="add_id">
-                        {% if cart_info.count_product %}
-                            {% set ns = namespace(found=false) %}
-                            {% for id_p in cart_info.arr_product_in_cart %}
-                                {% if id_p == el.id %}
-                                    {% set ns.found = true %}
-                                {% endif %}
-                            {% endfor %}
-                            {% if ns.found %}
-                                В корзине
-                            {% else %}
-                                Добавить в корзину
-                            {% endif %}
-                        {% else %}
-                            Добавить в корзину
-                        {% endif %}
+                {% if get_flashed_messages() == [] %}
+                    <p class="p-center">Осталось в наличии: <span id="maxCount">{{el.balance}}</span> шт.</p>
+                {% endif %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes p-center">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <div class="p-center">
+                    <button class="btn btn-by" onclick="return addInCart('{{el.id}}')" value="{{el.id}}" name="add_id" id="add_id">
+                        Добавить в корзину
                     </button>
                     <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
                         <button class="btn btn-by" >Купить в 1 клик</button>
                     </a>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{ url_for("static", filename="js/scripts.js") }}"></script>
     <div class="product-card-footer">
         <div class="product-tabs">
             <ul>
-                <li class="active" onclick="return ChangeBgColor('1');" id="btn1">
+                <li class="li hover-tab" onclick="return SelectTab('1');" id="btn1">
                     Характеристики
                 </li>
-                <li onclick="return ChangeBgColor('2');" id="btn2">
+                <li class="li" onclick="return SelectTab('2');" id="btn2">
                     Применяемость
                 </li>
-                <li onclick="return ChangeBgColor('3');" id="btn3">
+                <li class="li" onclick="return SelectTab('3');" id="btn3">
                     Отзывы
                 </li>
             </ul>
             <div id="content-slider">
-              <div class="displayyes" id="text1">
-                lorem ipsum 1
-              </div>
-              <div class="display" id="text2">
-                lorem ipsum 2
-              </div>
-              <div class="display" id="text3">
-                lorem ipsum 3
-              </div>
+                <div class="displayyes" id="text1">
+                    {{ el.description }}
+                </div>
+                <div class="display" id="text2">
+                    <p>
+                        Подходит для автомобилей {{ el.model_auto }}
+                    </p>
+                </div>
+                <div class="display" id="text3">
+                    Для того, что бы оставить отзыв нужно <a class="header-link" href="/login">Войти</a> или <a class="header-link" href="/registration">зарегистрироваться</a>
+                </div>
             </div>
         </div>
         <div class="product-page">
@@ -89,4 +86,5 @@
     </div>
     {% endfor %}
     </div>
+<script type="text/javascript" src="{{ url_for("static", filename="js/scripts.js") }}"></script>
 {% endblock %}

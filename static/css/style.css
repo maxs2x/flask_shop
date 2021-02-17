@@ -154,8 +154,7 @@ input {
     min-height: 500px;
 }
 .content-block-no-border {
-    padding: 10px;
-    margin-top: 5px;
+    margin-top: 25px;
     border-radius: 5px;
     min-height: 500px;
 }
@@ -190,7 +189,17 @@ input {
 .active {
     color: #e85a22;
 }
-
+.flashes{
+    list-style: none;
+    padding: 10px;
+    margin: 18px 0px;
+    border-top: 1px solid #c00;
+    border-bottom: 1px solid #c00;
+    color: #f26834;
+    background-color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
 .nav-main .header-nav-link {
     font-weight: 400;
     padding: 10px;
@@ -434,10 +443,24 @@ td {
 .product-card-top {
     border: 2px solid #d5d5d5;
     border-radius: 5px;
+    padding-bottom: 35px;
 }
-.card-img {
+.alert {
+  padding: 10px;
+  margin: 18px 0px;
+  border-top: 1px solid #c00;
+  border-bottom: 1px solid #c00;
+  color: #f26834;
+  background-color: #fff;
+  text-align: center;
+  font-size: 18px;
+}
+.card-img-slider {
     border: 2px solid #d5d5d5;
     border-left: none;
+}
+.bread-crumbs {
+    padding-left: 15px;
 }
 .info-product {
     display: flex;
@@ -450,18 +473,18 @@ div.info-product > div:nth-child(2) {
     border: 2px solid #d5d5d5;
 }
 .product-tabs ul {
+    margin-top: 0px;
     list-style: none;
     display: table;
     width: 100%;
     padding: 0px;
 }
-.product-tabs li {
+.li {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
     height: 54px;
     border-bottom: 1px solid #d5d5d5;
-    border-top: 1px solid #d5d5d5;
     cursor: pointer;
     font-size: 14px;
     font-weight: 400;
@@ -469,11 +492,25 @@ div.info-product > div:nth-child(2) {
     position: relative;
     width: 15%;
     padding-top: 5px;
+    border-left: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;
 }
-/* slider */
+#content-slider {
+    padding: 15px 20px;
+}
+/* slider product info*/
 
-.active {
-  background-color: #e85a22;
+.hover-tab {
+    border-top: 4px solid #e85a22;
+    border-left: none;
+    border-right: none;
+    border-bottom: none
+}
+#btn1 {
+    border-left: none;
+}
+#btn3 {
+    border-right: none;
 }
 .display {
   display:none;
