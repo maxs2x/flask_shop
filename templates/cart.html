@@ -12,7 +12,10 @@
 </div>
 
     <div class="container">
-
+        {% if not data %}
+        <p class="p-center-cart"><img src="{{ url_for("static", filename="img/cart.svg") }}"></p>
+            <p class="empty-cart">Ваша корзина пуста!</p>
+        {% else %}
         <table class="table table-borderless col-del">
             <thead>
                 <tr class="tr-zerro">
@@ -52,13 +55,13 @@
                         <form class="form" method="POST">
                             <div class="add-dell-item">
                                 <button class="count-action  btn-none"  type="submit" value="{{el.id}}" name="del_one_id" id="del_one_id">
-                                    <span class="basket-item-amount-btn-minus"></span>
+                                    <img src="{{ url_for('static', filename="img/iconmonstr-minus-6.svg") }}">
                                 </button>
                                 <div class="count-center">
                                     <span class="input-group-text">{{el.value}}</span>
                                 </div>
                                 <button class="count-action btn-none" type="submit"  value="{{el.id}}" name="add_one_id" id="add_one_id">
-                                    <span  class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
+                                    <img src="{{ url_for('static', filename="img/iconmonstr-plus-6.svg") }}">
                                 </button>
                             </div>
                         </form>
@@ -129,6 +132,7 @@
                     <button type="submit" class="btn btn-success btn-cart" value="" name="addasd_id" id="addasdae_id">Оформить заказ</button>
                 </div>
             </form>
+        {% endif %}
     </div>
     </div>
 

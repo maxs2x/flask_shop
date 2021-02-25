@@ -17,17 +17,19 @@
                 {% endif %}
             </div>
             <div>
+
                 <p class="p-center">Цена: <span class="orange">{{el.price}} руб.</span></p>
                     <span id="alert-before"></span>
                     <div class="add-dell-item">
                         <button class="count-action  btn-none" onclick="return Calculate('-');"   value="{{el.id}}" name="del_one_id" id="del_one_id">
-                            <span class="basket-item-amount-btn-minus"></span>
+
+                            <img src="{{ url_for('static', filename="img/iconmonstr-minus-6.svg") }}">
                         </button>
                         <div class="count-center">
                             <div class="input-group-text" id="count-product">1</div>
                         </div>
                         <button class="count-action btn-none" onclick="return Calculate('+');"  value="{{el.id}}" name="add_one_id" id="add_one_id">
-                            <span  class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
+                            <img src="{{ url_for('static', filename="img/iconmonstr-plus-6.svg") }}">
                         </button>
                     </div>
                 {% if get_flashed_messages() == [] %}
@@ -69,6 +71,7 @@
             <div id="content-slider">
                 <div class="displayyes" id="text1">
                     {{ el.description }}
+                    <img href="{{ url_for('static', filename="img/img-minus-button.jpg") }}">
                 </div>
                 <div class="display" id="text2">
                     <p>
