@@ -208,6 +208,9 @@ def categories_menu(variable_name, subpath):
             do_in_cart(request.form['add_id'], session)
     if variable_name == 'product-card':
         display = product_card(subpath)
+    elif variable_name == 'add-to-cart':
+        do_in_cart(subpath, session)
+        return redirect(url_for('cart'))
     else:
         display = redirect_for_subpath(subpath, request_path)
     return display
@@ -293,26 +296,22 @@ def cart():
             return redirect(url_for('cart'))
 
 
-@app.route('/add-to-cart/<id_product>', methods=['GET', 'POST'])
-def add_to_cart(id_product):
-    template = do_in_cart(id_product, session)
-    return template
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         user = Users.query.filter_by(email=email).first()
-        print(user.password)
-        print(generate_password_hash(password))
-        print(user.id)
+        if user == None:
+            flash('Пользователя с таким логином или паролем не существует')
+            return redirect(url_for('login'))
         if check_password_hash(str(user.password), str(password)):
             login_user(user, remember=True)
             cart_informations = cart_info(session)
             return render_template('/profile.html', name=user.name, cart_info=cart_informations)
-
+        else:
+            flash('Пользователя с таким логином или паролем не существует')
+            return redirect(url_for('login'))
     cart_informations = cart_info(session)
     return render_template('login.html', cart_info=cart_informations)
 
@@ -322,17 +321,6 @@ def login():
 def profile():
     cart_informations = cart_info(session)
     return render_template('profile.html', name=current_user.name, cart_info=cart_informations)
-
-
-@app.route('/test')
-def teat():
-    return render_template('test.html')
-
-
-@app.route('/test2')
-def test():
-    cart_informations = cart_info(session)
-    return render_template('test2.html', cart_info=cart_informations)
 
 
 @app.route('/logout')

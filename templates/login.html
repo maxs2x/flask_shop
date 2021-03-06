@@ -8,6 +8,15 @@
     <div class="container-login">
         <h1>Авторизация</h1>
         <br>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         <form class="form-contact" method="POST">
             <div class="row-input">
                 <div class="input-row">

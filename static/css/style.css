@@ -659,6 +659,16 @@ footer {
 table {
     width: 100%;
 }
+.group-btn {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-btn a{
+    margin-right: 5%;
+}
 
 @media screen and (max-width: 1050px){
     .btn {
@@ -866,6 +876,9 @@ table {
     .grid-9-1 .form{
         position: absolute;
         right: 25px;
+    }
+    .form-contact {
+        width: auto;
     }
 }
 

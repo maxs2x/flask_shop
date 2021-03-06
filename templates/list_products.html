@@ -25,11 +25,12 @@
                     <p class="p-center">Подходит на:  {{el.model_auto}} </p>
                     <p class="p-center">Цена: <span class="orange">{{el.price}} руб.</span></p>
                     <p class="p-center">Осталось в наличии: {{el.balance}}шт.</p>
-
-                          <form class="form p-center" method="POST">
-                              <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
+                    <div class="group-btn p-center">
+                        <a href="/add-to-cart/{{el.id}}" value="{{el.id}}" name="id" id="id" >
                                   <button class="btn btn-by" >Купить в 1 клик</button>
-                              </a>
+                        </a>
+                          <form class="" method="POST">
+
                               <button class="btn btn-by" type="submit" value="{{el.id}}" name="add_id" id="add_id">
                                   {% if cart_info.count_product %}
                                        {% set ns = namespace(found=false) %}
@@ -48,6 +49,7 @@
                                   {% endif %}
                               </button>
                           </form>
+                    </div>
                 </div>
 
             </div>
