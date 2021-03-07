@@ -48,3 +48,15 @@ function addInCart(id) {
     document.body.append(form);
     form.submit();
 }
+
+function alertInCart(id) {
+    if (document.getElementsByClassName('alert')[0]) {
+        let clear = document.getElementsByClassName('alert')[0];
+        clear.remove();
+    }
+    let interElem = document.getElementById(id);
+    let divEl = document.createElement('div');
+    divEl.className = "alert";
+    divEl.innerHTML = "<strong>Вы не можете купить больше, чем есть на складе</strong>";
+    interElem.append(divEl);
+}

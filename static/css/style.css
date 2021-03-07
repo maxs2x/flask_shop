@@ -54,11 +54,10 @@ input {
   font-weight: bold;
   margin: 5px 0px;
   cursor: pointer;
+  max-height: 38px;
 }
 .btn-by-main {
     color: #fff;
-    display: flex;
-    flex: end;
 }
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
@@ -151,8 +150,10 @@ input {
     padding: 10px;
     margin-top: 25px;
     border-radius: 5px;
-    min-height: 500px;
+    min-height: 570px;
 }
+.invalid { border-color: red; }
+#error { color: red }
 .content-block-no-border {
     margin-top: 25px;
     border-radius: 5px;
@@ -178,7 +179,8 @@ input {
     font-size: 18px;
     text-decoration: underline;
 }
-.btn-login{
+.btn-login {
+    height: 50px;
     width: 300px;
     margin-top: 50px;
     margin-bottom: 25px;
@@ -224,14 +226,14 @@ input {
 }
 th {
     font-size: 18px;
-    text-align: left;
+    text-align: center;
     color: #aaa;
     border-bottom: 1px solid #d5d5d5;
     border-top: 1px solid #d5d5d5;
     padding: 20px 3px;
 }
 td {
-    padding-right: 4%;
+    padding: 1%;
     text-align: left;
     border-bottom: 1px solid #d5d5d5;
 }
@@ -385,12 +387,15 @@ td {
 .card-price-btm .card-top p{
     font-size: 18px;
 }
-.card-price-btm form {
+.card-price-btm .form {
     padding-top: 22px;
     padding-left: 25px;
 }
-.card-price-btm form a {
+.card-price-btm .form a {
     bottom: 0px;
+}
+.card-price-btm p-center {
+    margin: 8px 0px;
 }
 .card-main:hover form a {
     text-decoration: underline;
@@ -673,11 +678,12 @@ table {
 @media screen and (max-width: 1050px){
     .btn {
         font-size: 16px;
+        padding: 0px 20px;
     }
-    .card-price-btm form {
-        padding-top: 2px;
+    .card-price-btm .form {
+        padding-top: 10px;
     }
-    .card-price-btm form button{
+    .card-price-btm .form button{
         color: #000;
     }
     .main-container {
@@ -718,8 +724,6 @@ table {
         min-height: 210px;
         height: auto;
         width: 97%;
-        margin: 5px;
-        padding-left: 20px;
         border-top: 3px solid #e85a22;
         text-color: #000;
     }
@@ -736,6 +740,7 @@ table {
         width: 100%;
         border: none;
         padding: 0px 8px;
+        margin: auto;
     }
     .none-content {
         display: none;
@@ -761,6 +766,9 @@ table {
     }
     #add_one_id {
         padding: 0px;
+    }
+    .btn-cart {
+        min-height: 48px;
     }
 }
 
@@ -790,8 +798,11 @@ table {
     .card-block {
         justify-content: center;
     }
-        .header-container-second {
+    .header-container-second {
         display: none;
+    }
+    .card-img-slider {
+        border: none;
     }
     .header-nav {
         display: none;
@@ -840,6 +851,9 @@ table {
     .info-product {
         flex-wrap: wrap;
         justify-content: center;
+    }
+    .p-center-cart img {
+        max-width: 280px;
     }
 }
 

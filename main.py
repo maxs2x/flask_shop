@@ -166,13 +166,12 @@ def do_in_cart(id_product, session, *args):
                     elem['value'] = elem['value'] + int(value)
                     if elem['value'] < 1:
                         del_in_cart(elem['product_id'], session)
-                        flash('На складе больше нет такого товара')
-                        break
+                        return flash('На складе больше нет такого товара')
                     session['cart'].append(elem)
                     session.modified = True
                     break
-                flash('На складе больше нет такого товара')
-                break
+                return flash('На складе больше нет такого товара')
+
             if a == len(session['cart']):
                 validation_value = quantity_validation(id_product, 0, value)
                 if validation_value:
@@ -267,6 +266,7 @@ def product_in_cart(session):
         product_info['value'] = int(elem['value'])
         product_info['producer'] = items[0].producer
         product_info['image'] = items[0].image
+        product_info['balance'] = int(items[0].balance)
         product_in_cart.append(product_info)
         print(product_in_cart)
     return product_in_cart
