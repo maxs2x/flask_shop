@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Добавление товара</title>
+<title>Контакты</title>
 {% endblock %}
 
-{% block varactive1 %}
-
+{% block active_contacts %}
+active
 {% endblock %}
 
 
@@ -14,10 +14,13 @@
     <div class="container">
         <h1>Как с нами связатся!</h1>
         <br>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-1 g-lg-2">
-            Приходите туда будем рады
+        <div class="row">
+            Пишите нам на почту info@shesternia.ru или звоните по телефону 8-800-2000-600
         </div>
-    <img src="{{ url_for('static', filename="img/iconmonstr-minus-2.svg") }}">
+        <br>
+        <p>
+            Время работы с 10:00 до 22:00 без выходных
+        </p>
     </div>
     </div>
 {% endblock %}

@@ -118,6 +118,10 @@ def route_first_level_path(subpath):
         return render_template('suspension.html', cart_info=cart_informations)
     elif subpath == 'contacts':
         return render_template('contacts.html', cart_info=cart_informations)
+    elif subpath == 'where':
+        return render_template('where.html', cart_info=cart_informations)
+    elif subpath == 'why':
+        return render_template('why.html', cart_info=cart_informations)
 
 
 def quantity_validation(id_product, value_in, value_add):

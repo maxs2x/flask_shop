@@ -65,16 +65,16 @@
                           <a href="/" class="wrapper__menu-link">Главная</a>
                           <a href="/about" class="wrapper__menu-link">О компании</a>
                           <a href="/contacts" class="wrapper__menu-link">Контакты</a>
-                          <a href="#" class="wrapper__menu-link">Услуги</a>
+                          <a href="/where" class="wrapper__menu-link">Где забрать?</a>
                       </div>
                 </div>
             </div>
             <div class="header-container-second">
-                <a class="header-nav-link" aria-current="page" href="/">ГЛАВНАЯ</a>
-                <a class="header-nav-link" href="/about">О НАС</a>
-                <a class="header-nav-link" href="/contacts">КОНТАКТЫ</a>
-                <a class="header-nav-link" href="#">ГДЕ ЗАБРАТЬ</a>
-                <a class="header-nav-link" href="#">ПОЧЕМУ У НАС ДЕШЕВЛЕ?</a>
+                <a class="header-nav-link {% block active_main %}  {% endblock %}" aria-current="page" href="/">ГЛАВНАЯ</a>
+                <a class="header-nav-link {% block active_about %}  {% endblock %}" href="/about">О НАС</a>
+                <a class="header-nav-link {% block active_contacts %}  {% endblock %}" href="/contacts">КОНТАКТЫ</a>
+                <a class="header-nav-link {% block active_where %}  {% endblock %}" href="/where">ГДЕ ЗАБРАТЬ</a>
+                <a class="header-nav-link {% block active_why %}  {% endblock %}" href="/why">ПОЧЕМУ У НАС ДЕШЕВЛЕ?</a>
             </div>
         </header>
         <main class="content-container">
@@ -114,10 +114,10 @@
                         </ul>
                         <ul class="ul-footer">
                             <li>
-                              <a class="footer-nav-link" href="#">Где забрать</a>
+                              <a class="footer-nav-link" href="/where">Где забрать</a>
                             </li>
                             <li>
-                                <a class="footer-nav-link" href="#">Почему у нас дешевле?</a>
+                                <a class="footer-nav-link" href="/why">Почему у нас дешевле?</a>
                             </li>
                         </ul>
                         <ul class="ul-footer">

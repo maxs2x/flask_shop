@@ -4,9 +4,13 @@
 <title>Магазин Шестерёнка</title>
 {% endblock %}
 
+{% block active_main %}
+active
+{% endblock %}
+
 {% block body %}
 
-    <h2 class="text-center">Новые поступления</h2>
+    <h2 class="p-center">Новые поступления</h2>
       <div class="card-block">
       {% for el in data %}
             <div class="card card-main">

@@ -664,6 +664,14 @@ footer {
 table {
     width: 100%;
 }
+
+ymaps {
+    text-align: center;
+    margin: auto;
+}
+.map {
+    text-align: center;
+}
 .group-btn {
     display: flex;
     flex-wrap: wrap;

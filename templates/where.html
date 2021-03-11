@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Местоположение</title>
+{% endblock %}
+
+{% block active_where %}
+active
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container">
+        <h1>Адреса пунктов выдачи</h1>
+        <br>
+        <div class="row">
+            Мы ждём вас в пункте выдачи по адресу посёлок Садаковский улица Московская 7а
+        </div>
+        <br>
+        <div class="map">
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af84bc9456fb1997b56d616e4eb5543c626cbc5881189a87f80264c39010b2e6e&amp;width=500&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
