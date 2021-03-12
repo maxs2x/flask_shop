@@ -20,7 +20,7 @@
         {% if error %}
             <p class=error><strong>Error:</strong> {{ error }}
         {% endif %}
-        <form class="form-contact" method="POST" id="demoForm" action="javascript:void(0)">
+        <form class="form-contact" method="POST" id="demoForm" >
 
             <div class="mb-3 row">
                 <div class="row-input">
@@ -35,20 +35,23 @@
             </div>
             <div class="mb-3 row">
                 <div class="row-input">
-                  <input type="text" class="form-control" name="phone" id="phone" placeholder="Введите ваш номер телефона">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Придумайте пароль">
+                    <div id="error_password"></div>
                 </div>
             </div>
             <div class="mb-3 row">
                 <div class="row-input">
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Придумайте пароль">
+                    <input type="password" class="form-control" name="password2" id="password2" placeholder="Повторите пароль" >
+                    <div id="error_password2"></div>
                 </div>
-                <div id="error"></div>
             </div>
             <div class="mb-3 row">
                 <div class="row-input">
-                  <input type="password" class="form-control" name="password2" id="password2" placeholder="Повторите пароль" >
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Телефон в формате 88007006050">
+                    <div id="error_phone"></div>
                 </div>
             </div>
+
             <button class="btn btn-login" type="submit">Зарегистрироваться</button>
         </form>
 

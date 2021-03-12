@@ -433,10 +433,10 @@ def registration():
         else:
             for x in validation:
                 if type(validation[x]) != type(True):
-                    flash(validation[x])
+                    flash('Введённые данные некорректны')
                     return render_template('registration.html', cart_info=cart_informations)
                 else:
-                    flash('Error')
+                    flash('Введённые данные некорректны')
                     return render_template('registration.html', cart_info=cart_informations)
 
 

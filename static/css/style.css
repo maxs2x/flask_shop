@@ -29,7 +29,7 @@ tr {
 }
 input {
     height: 35px;
-    width: 80%;
+    width: 85%;
     background: #f4f4f4;
     text-transform: none;
     border: 1px solid #ccc;
@@ -152,8 +152,16 @@ input {
     border-radius: 5px;
     min-height: 570px;
 }
-.invalid { border-color: red; }
-#error { color: red }
+.invalid {
+    border-color: red;
+}
+#error,  #error_phone, #error_password2, #error_password{
+    color: red;
+    display: inline-block;
+    position: absolute;
+    font-size: 16px;
+    width: 22%;
+}
 .content-block-no-border {
     margin-top: 25px;
     border-radius: 5px;
@@ -182,11 +190,11 @@ input {
 .btn-login {
     height: 50px;
     width: 300px;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 25px;
 }
 .row-input {
-    margin: 15px 0px;
+    margin: 20px 0px;
 }
 .active {
     color: #e85a22;
@@ -772,8 +780,19 @@ ymaps {
     .footer_card {
         border-top: 3px solid #e85a22;
     }
+    .row-input {
+        margin: 12px 0px 0px 0px;
+    }
     #add_one_id {
         padding: 0px;
+    }
+    #error,  #error_phone, #error_password2, #error_password{
+        color: red;
+        display: block;
+        position: relative;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 8px;
     }
     .btn-cart {
         min-height: 48px;
