@@ -312,6 +312,7 @@ def login():
         if check_password_hash(str(user.password), str(password)):
             login_user(user, remember=True)
             cart_informations = cart_info(session)
+            print(user)
             return render_template('/profile.html', name=user.name, cart_info=cart_informations)
         else:
             flash('Пользователя с таким логином или паролем не существует')
@@ -366,7 +367,7 @@ def validation_email(email):
 
 
 def validation_phone(phone):
-    if len(phone) == 10:
+    if len(phone) > 8:
         user = Users.query.filter(Users.phone == phone).first()
         if not user:
             return True
@@ -425,19 +426,21 @@ def registration():
                 db.session.add(new_user)
                 db.session.flush()
                 db.session.commit()
-                return render_template('login.html', cart_info=cart_informations)
+                return render_template('success.html', cart_info=cart_informations)
             except:
                 db.session.rollback()
                 print('Error ad in db')
                 return render_template('registration.html', cart_info=cart_informations)
         else:
-            for x in validation:
-                if type(validation[x]) != type(True):
-                    flash('Введённые данные некорректны')
-                    return render_template('registration.html', cart_info=cart_informations)
-                else:
-                    flash('Введённые данные некорректны')
-                    return render_template('registration.html', cart_info=cart_informations)
+            if validation['phone'] != True:
+                flash(validation['phone'])
+                return redirect(url_for('registration'))
+            elif validation['email'] != True:
+                flash(validation['email'])
+                return redirect(url_for('registration'))
+            else:
+                flash('Введённые данные некорректны')
+                return render_template('registration.html', cart_info=cart_informations)
 
 
 if __name__ == "__main__":
