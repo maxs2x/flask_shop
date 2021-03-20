@@ -10,12 +10,73 @@ active
 
 {% block body %}
     <div class="container">
-        <h1>История заказов</h1>
+        <h1 class="p-center">Личный кабинет</h1>
         <br>
-    <h1 class="title">
-      Welcome, {{ name }}!
-    </h1>
+        <ul class="pad_null">
+            <li class="profile_li hover-tab" onclick="return SelectTab('1');" id="btn1">
+                    Активные заказы
+            </li>
+            <li class="profile_li" onclick="return SelectTab('2');" id="btn2">
+                    История заказов
+            </li>
+        </ul>
+        <div id="content-slider">
+            <div class="displayyes" id="text1">
+            {% if not pending_order %}
+                <p class="empty-cart">У Вас нет оплаченых заказов!</p>
+                <p class="empty-cart">Для того, что бы заказ появился в активных, необходимо выбрать и оплатить любой товар!</p>
+            {% else %}
+                {% for el in pending_order %}
+                    <div class="card-block-row ">
+                        <div class="card-img">
+                            {% if el.image %}
+                                {% set name = el.image %}
+                                <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                            {% endif %}
+                        </div>
+                        <div class="card-text">
+                            <div class="grid-9-1">
+                                <a href="/product-card/{{el.id}}">
+                                    <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
+                                </a>
+                            </div>
+                            <p class="p-center">Цена за штуку: <span class="orange">{{el.price}} руб.</span></p>
+                            <p class="p-center"> Статус: готов к выдаче</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="display" id="text2">
+                {% if not history_purchase %}
+                    <p class="empty-cart">У Вас нет выполненных заказов!</p>
+                    <p class="empty-cart">Для того, что бы заказ появился в истории, Вы должны забрать его на точке выдачи!</p>
+                {% else %}
+                    {% for el in history_purchase %}
+                        <div class="card-block-row ">
+                            <div class="card-img">
+                                {% if el.image %}
+                                    {% set name = el.image %}
+                                    <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                                {% endif %}
+                            </div>
+                            <div class="card-text">
+                                <div class="grid-9-1">
+                                    <a href="/product-card/{{el.id}}">
+                                        <h3 class="p-center">{{el.title}} "{{el.producer}}"</h3>
+                                    </a>
+                                </div>
+                                <p class="p-center">Цена за штуку: <span class="orange">{{el.price}} руб.</span></p>
+                                <p class="p-center"> Статус: готов к выдаче</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     </div>
+    <script type="text/javascript" src="{{ url_for("static", filename="js/scripts.js") }}"></script>
+
 {% endblock %}

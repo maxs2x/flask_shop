@@ -46,19 +46,23 @@ class Users(UserMixin, db.Model):
     phone = db.Column(db.Integer, nullable=False)
 
 
+class HistorySells(db.Model):
+    user_email = db.Column(db.String, primary_key=True)
+    id_product = db.Column(db.String, nullable=True)
+    history = db.Column(db.String, nullable=True)
+    order_status = db.Column(db.String, nullable=True)
+    last_order = db.Column(db.String, nullable=True)
+
+
 @login_manager.user_loader
 def load_user(user_id):
-    print('load_user')
     return Users.query.get(int(user_id))
 
 
 def redirect_for_subpath(subpath, request):
-    print(request.method)
     cart_informations = cart_info(session)
     if request.method == 'GET':
         items = Products.query.filter_by(navigation_categories=str(subpath))
-        for elem in items:
-            print(elem)
         return render_template('list_products.html', data=items, cart_info=cart_informations)
     elif request.method == 'POST':
         session.modified = True
@@ -79,7 +83,6 @@ def cart_info(session):
         items = Products.query.filter_by(id=str(product['product_id']))
         cost_products_in_cart += int(items[0].price) * int(product['value'])
     info = {'count_product': count_product, 'cost_products_in_cart': cost_products_in_cart, 'arr_product_in_cart': id_product_in_cart}
-    print(info)
     return info
 
 
@@ -90,7 +93,7 @@ def bread_crumbs(url, elem):
         for item in menu_categories:
             if navigation_categories in item:
                 x = navigation_categories
-            return x
+                return x
 
 @app.route('/')
 def index():
@@ -130,7 +133,6 @@ def quantity_validation(id_product, value_in, value_add):
     if (int(value_add) + int(value_in)) <= int(items[0].balance):
         if (int(value_add) + int(value_in)) > -1:
             print('quantity_validation')
-            print(items[0].balance)
             return True
         print('quantity_validation FALSE')
         return False
@@ -187,7 +189,6 @@ def do_in_cart(id_product, session, *args):
                     break
                 break
     in_cart = product_in_cart(session)
-    print(session['cart'])
     cart_informations = cart_info(session)
     return render_template('cart.html', session=session, data=in_cart, cart_info=cart_informations)
 
@@ -311,9 +312,7 @@ def login():
             return redirect(url_for('login'))
         if check_password_hash(str(user.password), str(password)):
             login_user(user, remember=True)
-            cart_informations = cart_info(session)
-            print(user)
-            return render_template('/profile.html', name=user.name, cart_info=cart_informations)
+            return redirect(url_for('profile'))
         else:
             flash('Пользователя с таким логином или паролем не существует')
             return redirect(url_for('login'))
@@ -321,19 +320,58 @@ def login():
     return render_template('login.html', cart_info=cart_informations)
 
 
+class UserHistory:
+    def remove_characters(self, string):
+        arr_orders = []
+        for i in range(string.count(';')):
+            arr_orders.append(string[0:string.find(';')])
+            string = string[string.find(';') + 1:]
+        return arr_orders
+
+
+    def get_pending_order(self, email):
+        order = HistorySells.query.filter_by(user_email=email).first()
+        if len(order.last_order) > 0:
+            arr_last_order = self.remove_characters(order.last_order)
+            arr_items = []
+            for elem in arr_last_order:
+                items = Products.query.filter_by(id=int(elem)).first()
+                arr_items.append(items)
+            if order.order_status == 'Active':
+                return arr_items
+        else:
+            return False
+
+
+    @staticmethod
+    def write_pending_order(self, email, arr_id_orders):
+        pass
+
+
+    @staticmethod
+    def get_history_purchase(self, email):
+        history_purchase = HistorySells.query.filter_by(user_email=email).first()
+
+
+    @staticmethod
+    def add_to_history(self, email, arr_id_orders):
+        pass
+
+
 @app.route('/profile')
 @login_required
 def profile():
     cart_informations = cart_info(session)
-    return render_template('profile.html', name=current_user.name, cart_info=cart_informations)
+    email = current_user.email
+    pending_order = UserHistory().get_pending_order(email)
+    return render_template('profile.html', pending_order=pending_order, cart_info=cart_informations)
 
 
 @app.route('/logout')
 @login_required
 def logout():
-    cart_informations = cart_info(session)
     logout_user()
-    return render_template('login.html', cart_info=cart_informations)
+    return redirect(url_for('login'))
 
 
 def validation_name(name):

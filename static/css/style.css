@@ -522,6 +522,23 @@ div.info-product > div:nth-child(2) {
 li a {
     color: #999;
 }
+.profile_li {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    height: 54px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+    color: #333;
+    position: relative;
+    width: 15%;
+}
+.pad_null {
+    padding: 0px;
+    border-bottom: 1px solid #d5d5d5;
+    border-top: 1px solid #d5d5d5;
+}
 #content-slider {
     padding: 15px 20px;
 }
