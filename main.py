@@ -5,6 +5,9 @@ from flask_login import LoginManager, login_user, UserMixin, login_required, cur
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+print(basedir)
+
 from user_login import UserLogin
 from admin.admin import admin
 
@@ -21,6 +24,7 @@ app.register_blueprint(admin, url_prefix='/admin')
 login_manager = LoginManager(app)
 
 db = SQLAlchemy(app)
+db.init_app(app)
 
 
 class Products(db.Model):
@@ -98,8 +102,9 @@ def bread_crumbs(url, elem):
 @app.route('/')
 def index():
     items = Products.query.all()
-    cart_informations = cart_info(session)
-    return render_template('index.html', data=items, cart_info=cart_informations, main=[1, 2])
+    carts_information = cart_info(session)
+    print(items)
+    return render_template('index.html', data=items, cart_info=carts_information, main=[1, 2])
 
 
 @app.route('/<path:subpath>')

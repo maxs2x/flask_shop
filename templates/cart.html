@@ -33,7 +33,7 @@
                     <td scope="row">
                         {% if el.image %}
                         {% set name = el.image %}
-                            <img src="{{ url_for('static', filename="/downloads") }}/{{el.image}}" alt="{{el.image_alt}}">
+                            <img src="{{ url_for('static', filename="downloads") }}/{{el.image}}.jpg" alt="{{el.image_alt}}">
                         {% endif %}
                     </td>
                     <td>
