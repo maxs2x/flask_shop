@@ -103,8 +103,7 @@ def bread_crumbs(url, elem):
 def index():
     items = Products.query.all()
     carts_information = cart_info(session)
-    print(items)
-    return render_template('index.html', data=items, cart_info=carts_information, main=[1, 2])
+    return render_template('index.html', data=items[0: 11], cart_info=carts_information, main=[1, 2])
 
 
 @app.route('/<path:subpath>')
