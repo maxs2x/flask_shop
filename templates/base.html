@@ -18,12 +18,12 @@
             <div class="header-container-first">
                 <div class="header-logo">
                     <a class="navbar-brand" href="/">
-                        <img class="header-logo" src="{{ url_for("static", filename="logo.png") }}" alt="" width="40" height="40" class="d">
+                        <img class="header-logo img-header" src="{{ url_for("static", filename="logo.png") }}" alt="" width="40" height="40" class="d">
                         Шестёнка
                     </a>
                 </div>
                 <div class="header-cart">
-                    <img src="{{ url_for("static", filename="cart_icon.png") }}" height="35" width="35" alt="ops image">
+                    <img class="img-header" src="{{ url_for("static", filename="cart_icon.png") }}" height="35" width="35" alt="ops image">
                     <a href="/cart" style="text-decoration: none; color: #000000; padding-left: 7px;">
                         {% if cart_info.count_product %}
                         в корзине <span class="orange">{{cart_info.count_product}} товаров</span> на сумму <span class="orange">{{cart_info.cost_products_in_cart}} руб. </span> экономия 0 руб.
@@ -129,7 +129,7 @@
                     </div>
                     <div class="col-f-r">
                         <p class="right">Мы принимаем: </p>
-                        <img class="right" src="{{ url_for("static", filename="paysystems.png") }}">
+                        <img class="right img-header" src="{{ url_for("static", filename="paysystems.png") }}">
                     </div>
                 </div>
             </footer>
