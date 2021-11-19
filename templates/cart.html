@@ -13,7 +13,8 @@
 
     <div class="container">
         {% if not data %}
-        <p class="p-center-cart"><img src="{{ url_for("static", filename="img/cart.svg") }}"></p>
+        <p class="p-center-cart">
+            <img class="cart-img" src="{{ url_for("static", filename="img/cart.svg") }}"></p>
             <p class="empty-cart">Ваша корзина пуста!</p>
         {% else %}
         <table class="table table-borderless col-del">

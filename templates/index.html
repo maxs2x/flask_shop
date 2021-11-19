@@ -13,13 +13,22 @@ active
     <h2 class="p-center">Новые поступления</h2>
       <div class="card-block">
       {% for el in data %}
+          <script>
+                const img = document.getElementById("{{el.image}}")
+                img.addEventListener("error", function(event) {
+                  event.target.src = "https://default-image-link-goes-here";
+                  event.onerror = null;
+                });
+          </script>
             <div class="card card-main">
                 <a class="card-top" href="/product-card/{{el.id}}">
                     <div class="card-menu">
 
-                        {% if el.image %}
+                        {% if el.image%}
                             {% set name =     el.image %}
-                            <img src="{{ url_for('static', filename="downloads") }}/{{el.image}}.jpg" alt="{{el.image_alt}}">
+                            <img id="{{el.image}}" src="{{ url_for('static', filename="downloads") }}/{{el.image}}.jpg" alt="{{el.image_alt}}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename="no_photo.img") }}">
                         {% endif %}
                     </div>
                     <div class="card-main-bottom ">
