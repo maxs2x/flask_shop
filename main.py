@@ -349,16 +349,17 @@ class UserHistory:
 
     def get_pending_order(self, email):
         order = HistorySells.query.filter_by(user_email=email).first()
-        if len(order.last_order) > 0:
-            arr_last_order = self.remove_characters(order.last_order)
-            arr_items = []
-            for elem in arr_last_order:
-                items = Products.query.filter_by(id=int(elem)).first()
-                arr_items.append(items)
-            if order.order_status == 'Active':
-                return arr_items
-        else:
-            return False
+        if order != None:
+            if len(order.last_order) > 0:
+                arr_last_order = self.remove_characters(order.last_order)
+                arr_items = []
+                for elem in arr_last_order:
+                    items = Products.query.filter_by(id=int(elem)).first()
+                    arr_items.append(items)
+                if order.order_status == 'Active':
+                    return arr_items
+            else:
+                return False
 
 
     @staticmethod
