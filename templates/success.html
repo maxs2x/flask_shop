@@ -8,7 +8,9 @@
     <div class="container-login">
         <h1>Поздравляем!</h1>
         <br>
-        <p>Регистрация прошла успешно! Теперь Вам нужно авторизоваться.<p>
+        <p>Регистрация прошла успешно! Теперь Вам нужно
+            <a id="login_link" href="/login">авторизоваться.</a>
+        </p>
 
 
         {% with messages = get_flashed_messages() %}
@@ -20,20 +22,7 @@
                 </ul>
             {% endif %}
         {% endwith %}
-        <form class="form-contact" method="POST">
-            <div class="row-input">
-                <div class="input-row">
-                  <input type="text" class="form-control" name="email" id="email" placeholder="Введите e-mail">
-                </div>
-            </div>
-            <div class="row-input">
-                <div class="input-row">
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Введите пароль">
-                </div>
-            </div>
-            <button class="btn btn-login" type="submit">Войти</button>
-            <a href="#">Забыл пароль?</a>
-        </form>
+
 
 
     </div>

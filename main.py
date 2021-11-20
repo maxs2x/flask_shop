@@ -464,6 +464,11 @@ def validation_registration(name, email, password_1, password_2, phone):
     return result
 
 
+@app.route('/success')
+def success():
+    cart_informations = cart_info(session)
+    return render_template('success.html', cart_info=cart_informations)
+
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
@@ -483,7 +488,7 @@ def registration():
                 db.session.add(new_user)
                 db.session.flush()
                 db.session.commit()
-                return render_template('success.html', cart_info=cart_informations)
+                return redirect(url_for('success'))
             except:
                 db.session.rollback()
                 print('Error ad in db')
