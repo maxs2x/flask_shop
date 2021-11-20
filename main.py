@@ -85,7 +85,7 @@ def cart_info(session):
         id_product_in_cart.append(int(product['product_id']))
         count_product += int(product['value'])
         items = Products.query.filter_by(id=str(product['product_id']))
-        cost_products_in_cart += int(items[0].price) * int(product['value'])
+        cost_products_in_cart += transformation_in_int(items[0].price) * transformation_in_int(product['value'])
     info = {'count_product': count_product, 'cost_products_in_cart': cost_products_in_cart, 'arr_product_in_cart': id_product_in_cart}
     return info
 
@@ -134,7 +134,7 @@ def route_first_level_path(subpath):
 def quantity_validation(id_product, value_in, value_add):
     items = Products.query.filter_by(id=str(id_product))
 
-    if (int(value_add) + int(value_in)) <= int(items[0].balance):
+    if (int(value_add) + int(value_in)) <= transformation_in_int(items[0].balance):
         if (int(value_add) + int(value_in)) > -1:
             print('quantity_validation')
             return True
@@ -264,18 +264,32 @@ def create():
         return render_template('create.html')
 
 
+def transformation_in_int(value):
+    if type(value) == int:
+        return value
+    elif value == "-":
+        return 0
+    elif " " in value:
+        output_int = int(value.replace(' ', ''))
+        return output_int
+    elif ">" in value:
+        output_int = int(value.replace(">", ''))
+        return output_int
+
+
+
 def product_in_cart(session):
     product_in_cart = []
     for elem in session['cart']:
         product_info = dict()
         items = Products.query.filter_by(id=str(elem['product_id']))
-        product_info['price'] = int(items[0].price)
+        product_info['price'] = transformation_in_int(items[0].price)
         product_info['title'] = items[0].title
         product_info['id'] = elem['product_id']
         product_info['value'] = int(elem['value'])
         product_info['producer'] = items[0].producer
         product_info['image'] = items[0].image
-        product_info['balance'] = int(items[0].balance)
+        product_info['balance'] = transformation_in_int(items[0].balance)
         product_in_cart.append(product_info)
         print(product_in_cart)
     return product_in_cart
