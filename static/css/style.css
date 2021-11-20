@@ -11,6 +11,7 @@ a {
 }
 img {
   height: 100%;
+  margin: auto;
   display: block;
   position: relative;
 }
@@ -28,9 +29,14 @@ img:before {
   height: 100%;
   background-color: white;
   background-image: url("/static/no_photo.jpg");
+  background-repeat: no-repeat;
+  background-position:center;
 }
 a:hover {
     color: #d04413;
+}
+body > div.main-container > main > div > div > div > a {
+    min-width: 220px;
 }
 tr {
     border: 1px solid #d5d5d5;
@@ -519,6 +525,9 @@ td {
 }
 .cart-img{
     margin: auto;
+}
+.card-img{
+    height: 100%;
 }
 .bread-crumbs {
     padding-left: 15px;
