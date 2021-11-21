@@ -23,10 +23,10 @@
                     </a>
                 </div>
                 <div class="header-cart">
-                    <img class="img-header" src="{{ url_for("static", filename="cart_icon.png") }}" height="35" width="35" alt="ops image">
+                    <img class="img-header img-cart" src="{{ url_for("static", filename="cart_icon.png") }}" height="35" width="35" alt="ops image">
                     <a href="/cart" style="text-decoration: none; color: #000000; padding-left: 7px;">
                         {% if cart_info.count_product %}
-                        в корзине <span class="orange">{{cart_info.count_product}} товаров</span> на сумму <span class="orange">{{cart_info.cost_products_in_cart}} руб. </span> экономия 0 руб.
+                        в корзине <span class="orange">{{cart_info.count_product}} товаров</span> на сумму <span class="orange">{{cart_info.cost_products_in_cart}} руб. </span>
                         {% else %}
                             Ваша корзина пуста
                         {% endif %}

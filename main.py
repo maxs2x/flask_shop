@@ -303,6 +303,8 @@ def cart():
     if request.method == 'GET':
         in_cart = product_in_cart(session)
         return render_template('cart.html', data=in_cart, cart_info=cart_informations)
+    elif request.method == 'POST':
+        return redirect(url_for('sorry'))
     else:
         if ('del_id' in request.form) or ('del_one_id' in request.form):
             if 'del_id' in request.form:
@@ -317,6 +319,13 @@ def cart():
             do_in_cart(request.form['add_one_id'], session)
             session.modified = True
             return redirect(url_for('cart'))
+
+
+
+@app.route('/sorry')
+def sorry():
+    cart_informations = cart_info(session)
+    return render_template('sorry.html', cart_info=cart_informations)
 
 
 @app.route('/login', methods=['GET', 'POST'])

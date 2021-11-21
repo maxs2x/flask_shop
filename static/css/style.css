@@ -762,6 +762,9 @@ img {
     height: auto;
     display: inline;
 }
+.img-cart {
+    margin: 0;
+}
 #login_link {
     color: #E85A22;
 }
