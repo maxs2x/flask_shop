@@ -43,6 +43,11 @@
                         </ul>
                     {% endif %}
                 {% endwith %}
+                {% if el.balance == 0 %}
+                    <div class="p-center">
+                        <p>Данный товар закончился. Но в ближайшее время он появится в наличии.</p>
+                    </div>
+                {% else %}
                 <div class="p-center">
                     <button class="btn btn-by" onclick="return addInCart('{{el.id}}')" value="{{el.id}}" name="add_id" id="add_id">
                         Добавить в корзину
@@ -51,6 +56,7 @@
                         <button class="btn btn-by" >Купить в 1 клик</button>
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -72,7 +72,7 @@ input {
   border: 2px solid gray;
   color: #fff;
   background-color: #e85a22;
-  padding: 8px 20px;
+  padding: 5px 20px;
   border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
@@ -772,7 +772,7 @@ img {
 @media screen and (max-width: 1050px){
     .btn {
         font-size: 16px;
-        padding: 8px 20px;
+        padding: 5px 20px;
     }
     .card-price-btm .form {
         padding-top: 10px;

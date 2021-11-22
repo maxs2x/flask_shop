@@ -154,13 +154,14 @@ def do_in_cart(id_product, session, *args):
         value = int('1')
     # проверяет существует ли сессия корзины и если нет, то создает её, а если да, то норм
     if not session.get('cart'):
+        print(session)
         validation_value = quantity_validation(id_product, 0, value)
         if validation_value:
             session['cart'] = [{
                 'product_id': id,
                 'value': int(value)
             }]
-        flash('На складе больше нет такого товара')
+        session.modified = True
     else:
         # добавляем товар к сессии в виде словаря
         # для этого в цикле ищем товар добавленный в сессию с таким же id
@@ -275,6 +276,8 @@ def transformation_in_int(value):
     elif ">" in value:
         output_int = int(value.replace(">", ''))
         return output_int
+    else:
+        return 0
 
 
 
@@ -303,8 +306,6 @@ def cart():
     if request.method == 'GET':
         in_cart = product_in_cart(session)
         return render_template('cart.html', data=in_cart, cart_info=cart_informations)
-    elif request.method == 'POST':
-        return redirect(url_for('sorry'))
     else:
         if ('del_id' in request.form) or ('del_one_id' in request.form):
             if 'del_id' in request.form:
@@ -319,7 +320,8 @@ def cart():
             do_in_cart(request.form['add_one_id'], session)
             session.modified = True
             return redirect(url_for('cart'))
-
+        elif 'addasd_id' in request.form:
+            return redirect(url_for('sorry'))
 
 
 @app.route('/sorry')
