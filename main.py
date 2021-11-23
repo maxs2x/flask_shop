@@ -67,7 +67,11 @@ def redirect_for_subpath(subpath, request):
     cart_informations = cart_info(session)
     if request.method == 'GET':
         items = Products.query.filter_by(navigation_categories=str(subpath))
-        return render_template('list_products.html', data=items, cart_info=cart_informations)
+        first_items_in_category = Products.query.filter_by(navigation_categories=str(subpath)).first()
+        if first_items_in_category == None:
+            return render_template('list_products.html', data=None, cart_info=cart_informations)
+        else:
+            return render_template('list_products.html', data=items, cart_info=cart_informations)
     elif request.method == 'POST':
         session.modified = True
         items = Products.query.filter_by(navigation_categories=str(subpath))

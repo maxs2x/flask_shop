@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
+
+    {% if not data %}
+        <p class="p-center">Сейчас товар в данной категории отсутствует</p>
+    {% else %}
     <div class="card-block">
         {% for el in data %}
         <a href="/product-card/{{el.id}}">
@@ -49,7 +53,9 @@
 
             </div>
         </a>
+
         {% endfor %}
+    {% endif%}
     </div>
     </div>
 {% endblock %}
