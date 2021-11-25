@@ -1,0 +1,17 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+<title>Удаление товара</title>
+{% endblock %}
+
+{% block body %}
+<h1>Удаление товара</h1>
+        <form class="form" method="POST">
+            <div class="row mb-2">
+                <input type="text" class="from-control" name="id" id="id" placeholder="Введите номер"><br>
+            </div>
+            <button class="btn btn-default" type="submit">Добавить товар</button>
+        </form>
+
+
+{% endblock %}
